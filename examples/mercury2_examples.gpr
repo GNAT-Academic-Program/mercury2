@@ -1,0 +1,31 @@
+with "config/mercury2_examples_config.gpr";
+with "runtime_build.gpr";
+with "ravenscar_build.gpr";
+project Mercury2_Examples is
+
+   for Source_Dirs use ("src/**", "config/");
+   for Object_Dir use "obj/" & Mercury2_Examples_Config.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Exec_Dir use "bin";
+   for Main use ("blinky.adb");
+
+   for Target use runtime_build'Target;
+   for Runtime ("Ada") use runtime_build'Runtime ("Ada");
+
+   package Compiler is
+      for Default_Switches ("Ada") use Mercury2_Examples_Config.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Linker is
+      for Switches ("Ada") use Runtime_Build.Linker_Switches;
+   end Linker;
+
+   package Binder is
+      for Switches ("Ada") use ("-Es"); --  Symbolic traceback
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+end Mercury2_Examples;

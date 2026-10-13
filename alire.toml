@@ -1,0 +1,25 @@
+name = "mercury2"
+description = "Mercury 2 board support: GHAL generic instances on NEORV32"
+version = "0.1.0-dev"
+
+authors = ["Olivier Henley"]
+maintainers = ["Olivier Henley <olivier.henley@gmail.com>"]
+maintainers-logins = ["ohenley"]
+licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
+website = "https://github.com/GNAT-Academic-Program/mercury2"
+tags = ["embedded", "neorv32", "riscv", "fpga", "bare-metal"]
+
+[[depends-on]]
+neorv32               = "*"
+light_tasking_neorv32 = "*"
+debug_generic         = "*"
+
+# No clock configuration here. NEORV32 has one clock and reports its
+# frequency in SYSINFO; the neorv32 crate reads it at run time. The runtime
+# defaults (50 MHz, 128 KiB IMEM, 64 KiB DMEM, 19200 baud) already describe
+# the neorv32_mercury2 SoC.
+
+[[pins]]
+neorv32               = { url = "https://github.com/GNAT-Academic-Program/neorv32_ghal.git", branch = "main" }
+light_tasking_neorv32 = { url = "https://github.com/GNAT-Academic-Program/light_tasking_neorv32.git", branch = "main" }
+debug_generic         = { url = "https://github.com/GNAT-Academic-Program/debug_generic.git", branch = "main" }

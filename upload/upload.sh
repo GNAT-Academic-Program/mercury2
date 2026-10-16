@@ -87,7 +87,7 @@ if [ ! -r "$port" ] || [ ! -w "$port" ]; then
 fi
 
 # --- 4. Talk to the bootloader -----------------------------------------------
-stty -F "$port" "$baud" cs8 -cstopb -parenb raw -echo -hup clocal cread
+stty -F "$port" "$baud" cs8 -cstopb -parenb raw -echo -hupcl clocal cread
 exec 3<>"$port"
 
 # Reads from the port until the text appears or the time runs out.
